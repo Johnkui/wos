@@ -21,9 +21,11 @@ extern void switch_to(struct task_struct* cur, struct task_struct* next);
 /* 系统空闲时运行的线程 */
 static void idle(void* arg UNUSED) {
    while(1) {
+      put_str("idle running start\n");
       thread_block(TASK_BLOCKED);     
       //执行hlt时必须要保证目前处在开中断的情况下
       asm volatile ("sti; hlt" : : : "memory");
+      put_str("idle running end\n");
    }
 }
 

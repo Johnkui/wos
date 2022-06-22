@@ -92,7 +92,7 @@ static void make_main_thread(void) {
 /* 因为main线程早已运行,咱们在loader.S中进入内核时的mov esp,0xc009f000,
 就是为其预留了tcb,地址为0xc009e000,因此不需要通过get_kernel_page另分配一页*/
    main_thread = running_thread();
-   init_thread(main_thread, "main", 31);
+   init_thread(main_thread, "main", 2);
 
 /* main函数是当前线程,当前线程不在thread_ready_list中,
  * 所以只将其加在thread_all_list中. */

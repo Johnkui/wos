@@ -5,6 +5,10 @@
 #include "thread.h"
 #include "debug.h"
 
+/* 临时为测试添加 */
+#include "ioqueue.h"
+#include "keyboard.h"
+
 #define IRQ0_FREQUENCY	   100
 #define INPUT_FREQUENCY	   1193180
 #define COUNTER0_VALUE	   INPUT_FREQUENCY / IRQ0_FREQUENCY
@@ -34,6 +38,9 @@ static void frequency_set(uint8_t counter_port, \
 static void intr_timer_handler(void) {
    struct task_struct* cur_thread = running_thread();
 
+   if (ioq_empty(&kbd_buf)){
+   	put_str("timer schedule ");put_str(cur_thread->name);put_str("\n");
+   }
    ASSERT(cur_thread->stack_magic == 0x19870916);         // 检查栈是否溢出
 
    cur_thread->elapsed_ticks++;	  // 记录此线程占用的cpu时间嘀

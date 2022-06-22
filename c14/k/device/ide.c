@@ -347,7 +347,7 @@ void intr_hd_handler(uint8_t irq_no) {
 /* 硬盘数据结构初始化 */
 void ide_init() {
    printk("ide_init start\n");
-   uint8_t hd_cnt = *((uint8_t*)(0x475));	      // 获取硬盘的数量
+   uint8_t hd_cnt = 2;// *((uint8_t*)(0x475));	      // 获取硬盘的数量
    ASSERT(hd_cnt > 0);
    list_init(&partition_list);
    channel_cnt = DIV_ROUND_UP(hd_cnt, 2);	   // 一个ide通道上有两个硬盘,根据硬盘数量反推有几个ide通道

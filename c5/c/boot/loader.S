@@ -179,6 +179,7 @@ p_mode_start:
    ;在开启分页后,用gdt新的地址重新加载
    lgdt [gdt_ptr]             ; 重新加载
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;  此时不刷新流水线也没问题  ;;;;;;;;;;;;;;;;;;;;;;;;
 ;由于一直处在32位下,原则上不需要强制刷新,经过实际测试没有以下这两句也没问题.
 ;但以防万一，还是加上啦，免得将来出来莫句奇妙的问题.
@@ -232,6 +233,12 @@ mem_cpy:
    mov esi, [ebp + 12]	   ; src
    mov ecx, [ebp + 16]	   ; size
    rep movsb		   ; 逐字节拷贝
+;.movb:
+;   mov al, [esi]
+;   mov [edi], al
+;   inc edi
+;   inc esi
+;   loop .movb
 
    ;恢复环境
    pop ecx		

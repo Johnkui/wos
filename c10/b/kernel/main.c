@@ -6,17 +6,19 @@
 
 void k_thread_a(void*);
 void k_thread_b(void*);
+void k_thread_x(void*);
 
 int main(void) {
    put_str("I am kernel\n");
    init_all();
 
    thread_start("k_thread_a", 31, k_thread_a, "argA ");
+   thread_start("k_thread_x", 10, k_thread_x, "argX ");
    thread_start("k_thread_b", 8, k_thread_b, "argB ");
 
    intr_enable();
    while(1) {
-      console_put_str("Main ");
+      //console_put_str("Main ");
    };
    return 0;
 }
@@ -28,6 +30,10 @@ void k_thread_a(void* arg) {
    while(1) {
       console_put_str(para);
    }
+}
+
+void k_thread_x(void* arg) {
+	while(1);
 }
 
 /* 在线程中运行的函数 */
